@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const multer = require("multer");
+const {CloudinaryStorage}=require('multer-storage-cloudinary');
+const cloudinary=require('cloudinary').v2;
 const path = require("path");
 const edit_profile_ejs = express.Router();
 const {user, worker,Worker_data,User_data } = require('../mongodb');
@@ -11,20 +13,22 @@ const {user, worker,Worker_data,User_data } = require('../mongodb');
 edit_profile_ejs.use(bodyParser.json());
 edit_profile_ejs.use(bodyParser.urlencoded({ extended: true }));
 
-
-
-// Configure Multer storage
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'my_uploads');  // Destination folder for upload
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-    }
+//configure Cloudinary
+cloudinary.config({
+ cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
+ api_key:process.env.CLOUDINARY_API_KEY,
+ api_secret:process.env.CLOUDINARY_API_SECRET
 });
 
-const upload = multer({ storage: storage });
+const Storage=new CloudinaryStorage({
+cloudinary:cloudinary,
+params:{
+    folder: 'worker_profiles',
+    allowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'tiff', 'ico', 'svg']
+  },
+});
+
+const upload = multer({ storage: Storage });
 
 
 // profileRouter.js (POST route for updating profile)
@@ -89,8 +93,6 @@ edit_profile_ejs.post('/edit_profile/:username', upload.fields([
 });      
 
 
-// Serve uploaded images via static route
-edit_profile_ejs.use('/uploads', express.static(path.join(__dirname, 'my_uploads')));
 
 // Serve the form HTML file
 edit_profile_ejs.get("/edit_profile/:username",async (req, res) => {

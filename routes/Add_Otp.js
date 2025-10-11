@@ -3,10 +3,10 @@ const express=require('express');
 const otp_route=express.Router();
 const { user, worker,Worker_data,User_data } = require('../mongodb');
 
-otp_route.get('/view', (req, res) => {
+otp_route.get('/view', async (req, res) => {
     // Parse and decode the query parameter
-    const user_email  = req.session.user_email;
-    const bookingInfo = req.session.bookingInfo; // retrieve from session
+    const user_email  = await req.session.user_email;
+    const bookingInfo = await req.session.bookingInfo; // retrieve from session
     res.render('add_otp', { bookingInfo, user_email });
 });
 
@@ -14,7 +14,7 @@ otp_route.get('/view', (req, res) => {
 otp_route.post("/", async (req, res) => {
     // bookingInfo is a plain object, not a string
     const { bookingInfo } = req.body;
-    const user_email  = req.session.user_email;
+    const user_email  = await req.session.user_email;
     req.session.bookingInfo = bookingInfo;     // save entire object in session
     // Safely encode the JSON so it can be placed in a query string
     const encoded = encodeURIComponent(JSON.stringify(bookingInfo));
@@ -46,8 +46,8 @@ otp_route.post('/payment', async (req, res) => {
 
 
 // Render a payment page that initializes Razorpay
-otp_route.get('/pay-now', (req, res) => {
-  const { bookingInfo, totalTime ,Price } = req.session.paymentData || {};
+otp_route.get('/pay-now', async (req, res) => {
+  const { bookingInfo, totalTime ,Price } = await req.session.paymentData || {};
   const RAZORPAY_KEY=process.env.RAZORPAY_KEY;
   res.render('pay_now', { bookingInfo, totalTime ,Price ,RAZORPAY_KEY});
 });
@@ -55,7 +55,7 @@ otp_route.get('/pay-now', (req, res) => {
 otp_route.post('/payment/success', async (req, res) => {
   try {
     const { razorpay_payment_id } = req.body;
-    const { bookingInfo, totalTime ,Price } = req.session.paymentData || {};
+    const { bookingInfo, totalTime ,Price } = await req.session.paymentData || {};
 
     if (!razorpay_payment_id || !bookingInfo) {
       return res.status(400).json({ error: 'Missing data' });
@@ -63,7 +63,7 @@ otp_route.post('/payment/success', async (req, res) => {
 
     // ✅ Delete booking & order
     const worker_email=bookingInfo.workerEmail;
-    const user_email  = req.session.user_email;
+    const user_email  = await req.session.user_email;
     const bookingId=bookingInfo.bookingId;
     
     const worker=await Worker_data.findOne({email:worker_email});

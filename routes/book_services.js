@@ -10,7 +10,7 @@ book_service_route.get('/', (req, res) => {
 });
 
 book_service_route.post('/', async (req,res)=>{
-      const email = req.session.user_email;
+      const email = await req.session.user_email;
      const user =await User_data.findOne({email:email});
      const username=user.fullname;
      const { address,city,state,landmark,pincode,service_type,service_date,service_time,service_description } = req.body;  
