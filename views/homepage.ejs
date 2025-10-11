@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+        --primary-purple: #9100FF;
+        --dark-background: #1c1c1c;
+        --light-text: #f8f9fa;
+        }
+     
+        body{
+            background-color: #E7E7E7;
+        }
+	 /* Top navbar */
+	 /* Styling for the Post-Login Dropdown Menu */
+   /* Top navbar */
+    .navbar {
+      background-color: #000 !important;
+    }
+    .navbar .nav-link{
+     color: #9100FF !important;
+    }
+    .navbar .nav-link:hover, .navbar .nav-item.active .nav-link{
+      color: #9100FF !important;
+    }
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    .navbar-brand img {
+       height: 40px; /* Adjust logo size */
+       margin-right: 5px;
+    }
+    
+    /* Styling for the Post-Login Dropdown Menu Container */
+    .dropdown-menu {
+        border-radius: 8px; /* Rounded corners for modern look */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Soft shadow */
+        padding: 0; /* Remove default padding for full-height items */
+        background-color:var(--primary-purple) ;
+    }
+    
+    /* Style for the Header (User Role and Name) */
+    .dropdown-header {
+        color: #333;
+        font-weight: 600;
+        padding: 0.75rem 1rem 0.5rem;
+        white-space: nowrap; /* Prevents long names from wrapping */
+    }
+    
+    /* Style for individual Dropdown Items (links) */
+    .dropdown-item {
+        padding: 0.75rem 1rem;
+        transition: background-color 0.3s;
+    }
+    
+    /* Hover effect for Dropdown Items */
+    .dropdown-item:hover {
+        background-color: var(--primary-purple); /* Background hover matching the theme */
+        color: white !important; /* Text color change on hover to white */
+    }
+    
+    /* Style for the Logout Button icon spacing */
+    .dropdown-logout-btn i {
+        margin-right: 8px;
+    }
+    
+    /* Ensure the profile icon itself maintains the purple color in the navbar */
+    /* This is important to ensure the icon is always purple even if other nav links are white */
+    .nav-item.dropdown .nav-link i {
+        color: var(--primary-purple) !important; 
+    }
+
+    .navbar-profile-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary-purple);
+      background-color: #fff;
+      box-shadow: 0 0 6px rgba(145, 0, 255, 0.3);
+      transition: transform 0.2s ease;
+    }
+    
+    .navbar-profile-img:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-login {
+            background-color: var(--primary-purple);
+            color:white;
+            padding: 0.375rem 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none !important;
+            font-weight: 500;
+            margin-left: 15px;
+        }
+
+        /* --- Main Carousel Section Styling --- */
+        #carouselExampleIndicators .carousel-item img {
+            width: 100%;
+            height: 550px; 
+            object-fit: cover; 
+            filter: brightness(70%); 
+        }
+        .carousel-caption {
+            top: 50%; 
+            transform: translateY(-50%);
+            left: 10%; 
+            right: auto;
+            text-align: left;
+            padding-bottom: 0;
+            color: white; 
+        }
+        .carousel-caption b {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .carousel-caption p {
+            font-size: 1rem;
+            max-width: 500px;
+        }
+        .carousel-indicators li {
+            background-color: white;
+            opacity: 0.5;
+        }
+        .carousel-indicators .active {
+            opacity: 1;
+            background-color: var(--primary-purple);
+        }
+
+        /* --- User/Worker Cards Section Styling --- */
+        #mid {
+            padding: 4rem 0;
+            background-color:#E7E7E7;
+        }
+        .card-register {
+            text-align: center;
+            padding: 2rem;
+            border: none;
+            background-color:#E7E7E7;
+            margin: 1rem;
+            border-radius: 15px;
+            min-height: 350px; 
+            box-shadow: 0 4px 10px rgba(8, 8, 8, 0.05);
+        }
+        
+
+        .img-mid {
+            border-radius: 50%;
+            height: 150px;
+            width: 150px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        .card-register .btn {
+            background-color: var(--dark-background);
+            color: white;
+            border-radius: 5px;
+            padding: 0.5rem 2rem;
+            margin-top: 1rem;
+        }
+
+        /* --- Services Section Styling (Carousel) --- */
+        #services {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        #services h2 {
+            color: var(--primary-purple);
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+        /* Group of cards in one carousel item */
+        .service-card-row {
+            display: flex; /* Use flex to align cards within the row */
+            justify-content: center; /* Center the group of cards */
+            align-items: flex-start;
+            padding: 0 50px; /* Add padding to prevent cards from touching the controls */
+        }
+        .service-card-container {
+            /* This is the column that holds each card. We set its width here. */
+            padding: 0 15px; /* Spacing between cards */
+        }
+        .service-card {
+            text-align: center;
+            margin: 0; /* Margin handled by col padding */
+            background:#E7E7E7; /* Ensure card background is clear */
+            padding: 20px 0; /* Padding inside the card area */
+        }
+        .service-card .image img {
+            height: 140px;
+            width: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 5px solid #eee; 
+        }
+        .service-card .btn {
+            background-color: var(--dark-background);
+            color: white;
+            border-radius: 5px;
+            padding: 0.5rem 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+     /* 🎨 UPDATED: Style for the service carousel controls - Clean White Circle with Purple Arrow 🎨 */
+     /* Service Carousel Controls - Clean default arrows */
+       #servicesCarousel .carousel-control-prev,
+       #servicesCarousel .carousel-control-next {
+           width: 5%;
+           background: none;
+           border: none;
+           opacity: 0.8;
+           transition: opacity 0.3s;
+       }
+       #servicesCarousel .carousel-control-prev:hover,
+       #servicesCarousel .carousel-control-next:hover {
+           opacity: 1;
+       }
+       
+       /* Bigger black arrows, properly centered */
+       #servicesCarousel .carousel-control-prev-icon,
+       #servicesCarousel .carousel-control-next-icon {
+           background-image: none; /* remove Bootstrap default */
+           width: 50px;
+           height: 50px;
+       }
+       
+       /* Left arrow */
+       #servicesCarousel .carousel-control-prev-icon::after {
+           content: '‹';
+           font-size: 50px;
+           color: #000;
+           font-weight: bold;
+           line-height: 50px;
+       }
+       
+       /* Right arrow */
+       #servicesCarousel .carousel-control-next-icon::after {
+           content: '›';
+           font-size:50px;
+           color: #000;
+           font-weight: bold;
+           line-height: 50px;
+       }
+
+
+        /* End of control styling update */
+
+
+        /* --- Why Choose Us Section Styling --- */
+        #level3 {
+            padding: 4rem 0;
+        }
+        #level3 h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+        #level3 .col-md-5 {
+            padding-right: 4rem;
+        }
+        #level3 .col-md-7 img {
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .feature-item img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        .feature-item span {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* --- How It Works Section Styling --- */
+        #last {
+            padding: 4rem 0;
+            text-align: center;
+            background-color:#E7E7E7;
+        }
+        #last h2 {
+            color: var(--primary-purple);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        #last p:nth-of-type(1) {
+            margin-bottom: 3rem;
+        }
+        #last .col-md-4 {
+            padding: 0 2rem;
+        }
+
+        /* --- Footer Styling --- */
+        .footer {
+            background-color: var(--dark-background);
+            color: white;
+            padding: 40px 10px;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .footer-left {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #706f6f;
+        }
+        .footer-left img {
+            height: auto;
+            width: auto;
+            margin-bottom: 5px;
+        }
+
+        .footer-center{ 
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #706f6f;
+        }
+        .footer-center ul { 
+            list-style: none; 
+            padding: 0; 
+            line-height: 2.2; 
+        }
+        .footer-center ul li a { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 14px; 
+            transition: color 0.3s; 
+        }
+        .footer-center ul li a:hover { 
+            color: var(--primary-purple); 
+        }
+
+        .footer-right { 
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px; 
+        }
+        .footer-right .social { 
+            display: flex; 
+            align-items: center; 
+            font-size: 14px; 
+        }
+        .footer-right .social span { 
+            margin-right: 10px; 
+            color: #ccc; 
+            min-width: 70px; 
+            text-align: right;
+        }
+        .footer-right .social i { 
+            font-size: 16px; 
+            color: var(--primary-purple); 
+            background: white; 
+            border-radius: 4px; 
+            padding: 5px; 
+            transition: transform 0.3s; 
+            margin-left: 10px; 
+        }
+        .footer-right .social i:hover { 
+            transform: scale(1.1); 
+        }
+        .tagline { 
+            font-size: 13px; 
+            color: #ccc; 
+            margin-top: 8px; 
+        }
+
+        @media (max-width: 992px) {
+            /* On smaller screens, allow one card per row in service carousel */
+            .service-card-row {
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+            }
+            .service-card-container {
+                max-width: 300px;
+                margin-bottom: 20px;
+            }
+            .footer-left, .footer-center, .footer-right { border-right: none; margin-bottom: 20px; }
+            .carousel-caption { left: 5%; right: 5%; text-align: center; }
+            .carousel-caption b { font-size: 2rem; }
+        }
+        @media (min-width: 992px) {
+            /* On large screens, enforce 3 cards per row */
+            .service-card-container {
+                flex: 0 0 33.333333%;
+                max-width: 33.333333%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid px-0">
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/">
+            <img src="logo.png" alt="HomeWork Logo">
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item active px-3">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/Pricing">Pricing</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/About">About</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/Contact">Contact</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/Faq">FAQs</a>
+                </li>
+                
+                <% 
+                    // Determine which profile is logged in
+                    let profile = user || worker;
+                    let isLoggedIn = profile && profile.fullname;
+                    let profileType = user ? 'User' : (worker ? 'Worker' : 'Guest');
+                %>
+
+                <% if (isLoggedIn) { %>
+                <li class="nav-item dropdown px-3">
+                    <a class="nav-link" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 24px; padding: 0.375rem 0.5rem;">
+                        <% if (profile.picture && profile.picture.trim() !== '') { %>
+                            <img src="<%= profile.picture %>" 
+                                 alt="Profile" 
+                                 class="navbar-profile-img">
+                        <% } else { %>
+                            <i class="fas fa-user-circle" style="color: var(--primary-purple);"></i>
+                        <% } %>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                        <h6 class="dropdown-header" id="userRoleName"><%= profileType %>: <%= profile.fullname %></h6> 
+                        <div class="dropdown-divider"></div>
+                        
+                        <a class="dropdown-item" href="<%= user ? '/User_Dashboard' : '/Worker_Dashboard' %>">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item dropdown-logout-btn" href="/logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </li>
+                <% } else { %>
+                <li class="nav-item px-3">
+                    <a class="btn-login" href="/signin" >Login</a>
+                </li>
+                <% } %>
+                </ul>
+        </div>
+    </nav>
+</div>
+
+    <div class="container-fluid px-0" style="margin-bottom: 25px;"> 
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000"> 
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="homepage_1.jpg" alt="First slide"> 
+                    <div class="carousel-caption d-none d-md-block">
+                        <b class="book-your-trusted1">Book your trusted handyman in just a few clicks.</b>
+                        <p class="welcome-to-homework">
+                            Welcome to HomeWork, where your dream home becomes a reality.
+                            Discover skilled professionals, book with ease, and experience a
+                            new level of convenience.
+                        </p>
+                    </div>       
+                </div>
+                
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="homepage_2.jpg" alt="Second slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <b class="book-your-trusted1">Book your trusted handyman in just a few clicks.</b>
+                        <p class="welcome-to-homework">
+                            Welcome to HomeWork, where your dream home becomes a reality.
+                            Discover skilled professionals, book with ease, and experience a
+                            new level of convenience.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="homepage_3.jpg" alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <b class="book-your-trusted1">Book your trusted handyman in just a few clicks.</b>
+                        <p class="welcome-to-homework">
+                            Welcome to HomeWork, where your dream home becomes a reality.
+                            Discover skilled professionals, book with ease, and experience a
+                            new level of convenience.
+                        </p>
+                    </div>
+                </div>
+                
+                </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid" id="mid">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-6">
+                    <div class="card-register">
+                        <img src="user.jpg" alt="user" class="img-mid">
+                        <br>
+                        <span class="name"><b>User</b></span>
+                        <p class="card-text text-muted mt-2">
+                            Are you looking for great services at affordable prices?
+                            Well, you just landed the right place. We are here you help you find the right
+                            service for you.
+                        </p>
+                        <button class="btn btn-dark"><a href="signup.html" class="text-white" style="text-decoration: none;">Register as User</a></button>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-6">
+                    <div class="card-register">
+                        <img src="worker.jpg" alt="worker" class="img-mid">
+                        <br>
+                        <span class="name"><b>Worker</b></span>
+                        <p class="card-text text-muted mt-2">
+                            Want to showcase your skills and earn more? Let’s
+                            help you find customers and make earning easier for you. Join our community
+                            and we will grow together!
+                        </p>
+                        <button class="btn btn-dark"><a href="signup.html" class="text-white" style="text-decoration: none;">Register as Worker</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="services">
+        <div class="container">
+            <h2 class="text-center" style="color: var(--primary-purple);">Our Services</h2>
+            
+            <div id="servicesCarousel" class="carousel slide" data-ride="carousel" data-interval="false"> 
+                <div class="carousel-inner">
+                    
+                    <div class="carousel-item active">
+                        <div class="row service-card-row">
+                            <div class="col-lg-4 col-md-6 service-card-container">
+                                <div class="service-card">
+                                    <div class="image">
+                                        <img src="Plumbing.jpg" alt="Plumbing" class="img-fluid"> 
+                                    </div>
+                                    <div class="name-profession">
+                                        <span class="name"><b>Plumbing</b></span>
+                                        <button class="btn btn-dark btn-block">Book Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 service-card-container">
+                                <div class="service-card">
+                                    <div class="image">
+                                        <img src="Painting.jpg" alt="Painting" class="img-fluid"> 
+                                    </div>
+                                    <div class="name-profession">
+                                        <span class="name"><b>Painting</b></span>
+                                        <button class="btn btn-dark btn-block">Book Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 service-card-container">
+                                <div class="service-card">
+                                    <div class="image">
+                                        <img src="Furnishing.jpg" alt="Furnishing" class="img-fluid"> 
+                                    </div>
+                                    <div class="name-profession">
+                                        <span class="name"><b>Furnishing</b></span>
+                                        <button class="btn btn-dark btn-block">Book Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="row service-card-row">
+                            <div class="col-lg-4 col-md-6 service-card-container">
+                                <div class="service-card">
+                                    <div class="image">
+                                        <img src="homepage_1.jpg" alt="Electrical" class="img-fluid"> 
+                                    </div>
+                                    <div class="name-profession">
+                                        <span class="name"><b>Electrical</b></span>
+                                        <button class="btn btn-dark btn-block">Book Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 service-card-container">
+                                <div class="service-card">
+                                    <div class="image">
+                                        <img src="homepage_2.jpg" alt="Cleaning" class="img-fluid"> 
+                                    </div>
+                                    <div class="name-profession">
+                                        <span class="name"><b>Cleaning</b></span>
+                                        <button class="btn btn-dark btn-block">Book Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 service-card-container">
+                                <div class="service-card">
+                                    <div class="image">
+                                        <img src="homepage_3.jpg" alt="Gardening" class="img-fluid"> 
+                                    </div>
+                                    <div class="name-profession">
+                                        <span class="name"><b>Gardening</b></span>
+                                        <button class="btn btn-dark btn-block">Book Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <a class="carousel-control-prev" href="#servicesCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#servicesCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="container-fluid" id="level3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5">
+                    <h2 class="text-left"><b style="color: var(--primary-purple);">Why</b> <br> <b>Choose Us?</b></h2>
+                    
+                    <div class="feature-item">
+                        <img src="seamless_booking.jpg" alt="" > 
+                        <span>Seamless Booking</span>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <img src="Trust_and_readablity.jpg" alt="" > 
+                        <span>Trust and Reliability</span>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <img src="Extensive_work.jpg" alt="" > 
+                        <span>Extensive Network</span>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <img src="Quality_Assurance.jpg" alt="" > 
+                        <span>Quality Assurance</span>
+                    </div>
+                </div>
+
+                <div class="col-md-7 mt-4 mt-md-0">
+                    <img class="img-fluid" src="Handshake.jpg" alt="Handshake" style="height: 357px; width: 100%;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="last">
+        <div class="container">
+            <h2 style="color: var(--primary-purple);"><b>How does this work?</b></h2>
+            <p>Seems confusing? Well, it's pretty simple.</p><br>
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-mid" src="Book_services.jpg" alt="" height="150px" width="150px">
+                    <h3><b>Book Your service</b></h3>
+                    <p>Find the perfect service provider<br> and book his appointment.</p>
+                </div>
+                <div class="col-md-4">
+                    <img class="img-mid" src="work_done.jpg" alt="" height="150px" width="150px">
+                    <h3><b>Get The Work done</b></h3>
+                    <p>We'll provide efficient service<br> at your place.</p>
+                </div>
+                <div class="col-md-4">
+                    <img class="img-mid" src="pay_service.jpg" alt="" height="150px" width="150px">
+                    <h3><b>Pay after service</b></h3>
+                    <p>You can pay after you have<br> received the service.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <img src="logo.png" alt="HomeWork Logo">
+                <p class="tagline">Book your trusted handyman in just a few clicks.</p>
+            </div>
+
+            <div class="footer-center">
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Sign In</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-right">
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
+
+</body>
+</html>
