@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+            integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>About</title>
+  <style>
+    body { 
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: rgb(200, 196, 196);
+    }
+
+       :root {
+        --primary-purple: #9100FF;
+        --dark-background: #1c1c1c;
+        --light-text: #f8f9fa;
+        }
+     
+	 /* Top navbar */
+	 /* Styling for the Post-Login Dropdown Menu */
+   /* Top navbar */
+    .navbar {
+      background-color: #000 !important;
+    }
+    .navbar .nav-link{
+     color: #9100FF !important;
+    }
+    .navbar .nav-link:hover, .navbar .nav-item.active .nav-link{
+      color: #9100FF !important;
+    }
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    .navbar-brand img {
+       height: 40px; /* Adjust logo size */
+       margin-right: 5px;
+    }
+    
+    /* Styling for the Post-Login Dropdown Menu Container */
+    .dropdown-menu {
+        border-radius: 8px; /* Rounded corners for modern look */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Soft shadow */
+        padding: 0; /* Remove default padding for full-height items */
+        background-color:var(--primary-purple) ;
+    }
+    
+    /* Style for the Header (User Role and Name) */
+    .dropdown-header {
+        color: #333;
+        font-weight: 600;
+        padding: 0.75rem 1rem 0.5rem;
+        white-space: nowrap; /* Prevents long names from wrapping */
+    }
+    
+    /* Style for individual Dropdown Items (links) */
+    .dropdown-item {
+        padding: 0.75rem 1rem;
+        transition: background-color 0.3s;
+    }
+    
+    /* Hover effect for Dropdown Items */
+    .dropdown-item:hover {
+        background-color: var(--primary-purple); /* Background hover matching the theme */
+        color: white !important; /* Text color change on hover to white */
+    }
+    
+    /* Style for the Logout Button icon spacing */
+    .dropdown-logout-btn i {
+        margin-right: 8px;
+    }
+    
+    /* Ensure the profile icon itself maintains the purple color in the navbar */
+    /* This is important to ensure the icon is always purple even if other nav links are white */
+    .nav-item.dropdown .nav-link i {
+        color: var(--primary-purple) !important; 
+    }
+
+    .navbar-profile-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary-purple);
+      background-color: #fff;
+      box-shadow: 0 0 6px rgba(145, 0, 255, 0.3);
+      transition: transform 0.2s ease;
+    }
+    
+    .navbar-profile-img:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-login {
+            background-color: var(--primary-purple);
+            color:white;
+            padding: 0.375rem 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none !important;
+            font-weight: 500;
+            margin-left: 15px;
+        }
+    
+    .btn-left{
+        display:flex;
+        justify-content:start;
+        margin:5px 10px 5px 10px;
+    }
+
+    #btn{
+     
+     font-size: 25px;
+     color:#1C1C1C;
+     font-weight:bold;
+     border:none;
+     background-color:rgb(200, 196, 196);
+    }
+
+    .first{
+         margin:5px 10px 5px 10px;
+        background-color: rgb(200, 196, 196);
+    }
+   .first .row {
+    display: flex;
+    align-items: stretch; /* Make both columns same height */
+    padding-bottom:20px;
+    }
+    
+    .first .row .col-md-4 img {
+        width: 100%;
+        height: 100%;    /* Don't let it exceed column */
+        object-fit: cover;   /* Crop instead of squish */
+        border-radius: 20px;
+        height: 240px;
+    }
+        
+
+    .second{
+        margin:15px 10px 5px 10px;
+        background-color: #E7E7E7;
+        border-radius:20px;
+        text-align: center;
+    }
+
+     .col-md{
+    text-align: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: rgb(255, 255, 255);
+    }
+    .img-mid{
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    }
+    .third{
+        margin:15px 10px 5px 10px;
+        border-radius:20px;
+        text-align: center;
+    }
+    .third .row {
+    display: flex;
+    align-items: stretch; /* Makes both columns equal height */
+    padding-top: 30px;
+    padding-bottom: 20px;
+   }
+
+   .third .row .col-md-4 img {
+    width: 100%;   /* Take full column width */
+    height: 100%;  /* Match column height */
+    object-fit: cover; /* Keep image proportional & avoid distortion */
+    border-radius:20px;
+   }
+
+        .personal-showcase {
+          background: linear-gradient(135deg, #6e00ff, #9c27b0);
+          padding: 60px 20px;
+          border-radius: 20px;
+          text-align: center;
+          color: white;
+        }
+        
+        .profile-card {
+          max-width: 500px;
+          margin: auto;
+          background: rgba(255, 255, 255, 0.05);
+          padding: 30px;
+          border-radius: 20px;
+          box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .profile-pic {
+          width: 150px;
+          height: 150px;
+          object-fit: cover;
+          border-radius: 50%;
+          border: 4px solid white;
+          margin-bottom: 15px;
+        }
+        
+        .name {
+          font-size: 1.8rem;
+          margin-bottom: 5px;
+        }
+        
+        .tagline {
+          font-size: 1rem;
+          opacity: 0.9;
+          margin-bottom: 20px;
+        }
+        
+        .skills-icons span {
+          display: inline-block;
+          background: rgba(255,255,255,0.15);
+          padding: 5px 10px;
+          margin: 5px;
+          border-radius: 8px;
+          font-size: 0.9rem;
+        }
+        
+        .about-me {
+          font-size: 0.95rem;
+          margin: 20px 0;
+          line-height: 1.4;
+        }
+        
+        .contact-links a {
+          display: inline-block;
+          margin: 10px;
+          padding: 10px 15px;
+          background: white;
+          color: #6e00ff;
+          border-radius: 6px;
+          font-weight: bold;
+          text-decoration: none;
+          transition: 0.3s;
+        }
+        
+        .contact-links a:hover {
+          background: #ff4081;
+          color: white;
+        }
+
+        /* --- Footer Styling --- */
+        .footer {
+            background-color: var(--dark-background);
+            color: white;
+            padding: 40px 10px;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .footer-left {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #706f6f;
+        }
+        .footer-left img {
+            height: auto;
+            width: auto;
+            margin-bottom: 5px;
+        }
+
+        .footer-center{ 
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #706f6f;
+        }
+        .footer-center ul { 
+            list-style: none; 
+            padding: 0; 
+            line-height: 2.2; 
+        }
+        .footer-center ul li a { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 14px; 
+            transition: color 0.3s; 
+        }
+        .footer-center ul li a:hover { 
+            color: var(--primary-purple); 
+        }
+
+        .footer-right { 
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px; 
+        }
+        .footer-right .social { 
+            display: flex; 
+            align-items: center; 
+            font-size: 14px; 
+        }
+        .footer-right .social span { 
+            margin-right: 10px; 
+            color: #ccc; 
+            min-width: 70px; 
+            text-align: right;
+        }
+        .footer-right .social i { 
+            font-size: 16px; 
+            color: var(--primary-purple); 
+            background: white; 
+            border-radius: 4px; 
+            padding: 5px; 
+            transition: transform 0.3s; 
+            margin-left: 10px; 
+        }
+        .footer-right .social i:hover { 
+            transform: scale(1.1); 
+        }
+        .tagline { 
+            font-size: 13px; 
+            color: #ccc; 
+            margin-top: 8px; 
+        }
+    @media (max-width: 992px) {
+            .footer-left, .footer-center, .footer-right { border-right: none; margin-bottom: 20px; }
+        }
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+<div class="container-fluid px-0">
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/">
+            <img src="logo.png" alt="HomeWork Logo">
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item active px-3">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/Pricing">Pricing</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/About">About</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/Contact">Contact</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/Faq">FAQs</a>
+                </li>
+                
+                <% 
+                    // Determine which profile is logged in
+                    let profile = user || worker;
+                    let isLoggedIn = profile && profile.fullname;
+                    let profileType = user ? 'User' : (worker ? 'Worker' : 'Guest');
+                %>
+
+                <% if (isLoggedIn) { %>
+                <li class="nav-item dropdown px-3">
+                    <a class="nav-link" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 24px; padding: 0.375rem 0.5rem;">
+                        <% if (profile.picture && profile.picture.trim() !== '') { %>
+                            <img src="<%= profile.picture %>" 
+                                 alt="Profile" 
+                                 class="navbar-profile-img">
+                        <% } else { %>
+                            <i class="fas fa-user-circle" style="color: var(--primary-purple);"></i>
+                        <% } %>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                        <h6 class="dropdown-header" id="userRoleName"><%= profileType %>: <%= profile.fullname %></h6> 
+                        <div class="dropdown-divider"></div>
+                        
+                        <a class="dropdown-item" href="<%= user ? '/User_Dashboard' : '/Worker_Dashboard' %>">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item dropdown-logout-btn" href="/logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </li>
+                <% } else { %>
+                <li class="nav-item px-3">
+                    <a class="btn-login" href="signin.html" >Login</a>
+                </li>
+                <% } %>
+                </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="left-btn" >
+        <button id="btn" onclick="window.history.back()"><</button>
+    </div>
+    <div class="first">
+        <div class="row">
+            <div class="col-md-4">
+                <img  src="./krakenimages-Y5bvRlcCx8k-unsplash.jpg" alt="">
+            </div>
+            <div class="col-md-8">
+                <h2 style="color:#8823ed"><b>Our Mission</b></h2>
+                <p>At Homework, our mission is to revolutionize the way people access and experience home services. We strive to provide a seamless platform that connects homeowners with skilled professionals, making the process of booking and receiving quality services effortless. 
+                 Our aim is to simplify and streamline home improvements, repairs, and maintenance, ensuring that every task, no matter how small, is handled with utmost care and expertise. We are dedicated to delivering a superior customer experience, focusing on reliability, convenience, and customer satisfaction. 
+                 Through our commitment to innovation and excellence, we aim to be a trusted go-to platform for all home service needs, empowering homeowners to enhance their living spaces with ease and confidence.
+                </p>
+            </div>
+        </div>
+    </div>
+     
+
+
+    <div class="second" >
+        <h2 style="color:#8823ed;margin-bottom:30px;padding-top:15px"><b>Work Process</b></h2>
+        <div class="row" >
+            <div class="col-md-4" style="border-right:1px solid #3a3939">
+                <img class="img-mid"src="leg laptop.jpg" alt="" height="150px" width="150px"><br>
+                <h3><b>Book Your service</b></h3>
+                <p>Find the perfect service provider<br> and book his appointment .</p>
+            </div>
+            <div class="col-md-4" style="border-right:1px solid #3a3939">
+            <img  class="img-mid" src="battlecreek-coffee-roasters-NfG4rXmceFM-unsplash.jpg" alt="" height="150px" width="150px">
+            <br><h3><b>Get The Work done</b></h3>
+            <p>We'll provide efficent service <br> at your place.</p>
+        </div>
+            <div class="col-md-4" >
+            <img class="img-mid" src="mika-baumeister-PZao9UjlbMY-unsplash.jpg" alt="" height="150px" width="150px">
+            <h3><b>Pay after service</b></h3>
+            <p>You can pay after you have<br> recieved the service.</p>
+            </div>
+        </div>
+        <div style="padding-top:15px;padding-bottom:15px;"> </div>
+      </div>
+
+      <div class="third">
+        <div class="row">
+            <div class="col-md-8" style="text-align:left">
+                 <h2 style="color:#8823ed;margin-bottom:15px;"><b>Who are we?</b></h2>
+                <p>We are a team of dedicated professionals on a mission to transform the way homeowners experience home services. We understand that finding reliable and skilled professionals for various home projects can be a daunting task. That's why, we have created a platform that connects homeowners with trusted and verified experts effortlessly and efficiently.
+                   Our goal is to provide homeowners with a seamless and convenient solution for all their home service needs. With our user-friendly platform, you can easily browse through a wide range of services, compare professionals, and book appointments that suit your schedule. We take pride in our carefully curated network of skilled workers who are committed to delivering exceptional services and exceeding customer expectations.
+                   At Homework, we prioritize transparency, reliability, and customer satisfaction. We are passionate about creating a positive and stress-free experience for homeowners, ensuring that every task, from small repairs to major renovations, is handled with professionalism and expertise. Join us and discover the ease and peace of mind that comes with choosing Homework for your home service needs.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="./client-user.jpg" alt="">
+            </div>
+        </div>
+      </div>
+
+
+  <section class="personal-showcase">
+  <div class="profile-card">
+    <img src="./siddhant.jpeg" alt="Your Name" class="profile-pic">
+    <h2 class="name">Siddhant Rakesh Rai</h2>
+    <p class="tagline">Full-Stack Developer |Database Administrator | Backend Architect</p>
+    
+    <div class="skills-icons">
+      <span>🌐 HTML / CSS / JS</span>
+      <span>⚛️ React / Node.js</span>
+      <span>🗄 MongoDB / MySQL</span>
+      <span>🎨 Figma / Photoshop</span>
+    </div>
+
+    <p class="about-me">
+     While the UI design was provided, I engineered the entire project  building the backend, integrating the frontend, and deploying the finished product.
+I specialize in turning design concepts into fully functional, user-friendly web applications.
+    </p>
+
+    <div class="contact-links">
+      <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</section>
+   
+</div>
+  
+      <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <img src="logo.png" alt="HomeWork Logo">
+                <p class="tagline">Book your trusted handyman in just a few clicks.</p>
+            </div>
+
+            <div class="footer-center">
+                <ul>
+                    <li><a href="/About">About</a></li>
+                    <li><a href="/Signin">Sign In</a></li>
+                    <li><a href="/Faq">FAQs</a></li>
+                    <li><a href="/Pricing">Pricing</a></li>
+                    <li><a href="/Contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-right">
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+</footer>
+
+  <!-- ✅ Required scripts for dropdown to work -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script> 
+
+</body>
+</html>

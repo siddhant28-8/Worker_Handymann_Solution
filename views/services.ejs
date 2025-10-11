@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Services</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    body {
+      height: 100%;          /* allow body to take full viewport height */
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+        background: linear-gradient(to bottom, #f8f3fc, #afa9c6);
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .card-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 30px;
+    }
+
+    .card {
+      position: relative;
+      background: #fff;
+      max-width: 325px;
+      width: 325px;
+      margin: 25px;
+      box-shadow: 0 5px 25px rgb(1 1 1 / 20%);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .card-image {
+      max-height: 200px;
+      text-align: center;
+    }
+
+   .card-image img {
+     width: 40vw;          /* responsive width relative to viewport */
+     max-width: 160px;     /* won't exceed 160px */
+     height: 40vw;         /* keep square aspect ratio */
+     max-height: 160px;    /* won't exceed 160px */
+     border-radius: 50%;   /* circular shape */
+     object-fit: cover;    /* properly fit image inside circle */
+     display: block;       /* avoid extra spacing */
+     margin: 0 auto;       /* center horizontally */
+   }
+
+
+    .card-info {
+      text-align: center;
+      color: #222;
+      padding: 10px 20px 20px;
+    }
+
+    .btn-dark {
+      background-color: #222;
+      font: 1em sans-serif;
+      color: #fff;
+      border-radius: 10px;
+      padding: 6px 14px;
+    }
+
+    .btn-dark:hover {
+      background-color: rgb(86, 83, 83);
+    }
+
+    .card-info h3 {
+      font-size: 1.8em;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .card-info p {
+      font-size: 1em;
+      margin-bottom: 5px;
+    }
+
+    .pagination {
+      text-align: center;
+      margin: 0 30px 60px;
+      user-select: none;
+    }
+
+    .pagination li {
+      display: inline-block;
+      margin: 5px;
+      box-shadow: 0 5px 25px rgb(1 1 1 / 10%);
+    }
+
+    .pagination li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2em;
+      line-height: 45px;
+    }
+
+    .previous-page,
+    .next-page {
+      background: #0AB1CE;
+      width: 80px;
+      border-radius: 45px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .previous-page:hover {
+      transform: translateX(-5px);
+    }
+
+    .next-page:hover {
+      transform: translateX(5px);
+    }
+
+    .current-page,
+    .dots {
+      background: #ccc;
+      width: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .active {
+      background: #0AB1CE;
+    }
+
+    .disable {
+      background: #ccc;
+    }
+
+    .no-service {
+  /* make the whole viewport available */
+  height: 100vh;
+  width: 100vw;
+
+  /* center content */
+  display: flex;
+  flex-direction: column;   /* stack image over text */
+   /* vertical center */
+  align-items: center;      /* horizontal center */
+
+  text-align: center;
+}
+
+.no-service img {
+  margin-top: 40px;
+  max-width: 400px;
+  max-height: 400px;
+  border-radius: 50%;       /* circular image if desired */
+}
+
+   /* Optional: tweak on very small screens */
+   @media (max-width: 500px) {
+     .card-image img {
+       width: 30vw;
+       height: 30vw;
+     }
+   }
+
+
+  </style>
+</head>
+<body>
+ <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 30px;padding-top:30px">
+  <h3 style="font-weight:400px;font:Lora;color:#9100FF">Book Service</h3>
+  <a href="/User_Dashboard" style="font-weight:400px;font:Lora;color:#9100FF">Back to dashboard</a>
+</div>
+
+
+  <div class="container">
+    <% if (services && services.length > 0) { %>
+    <div class="card-content">
+      <% services.forEach(service => { %>
+        <div class="card">
+          <div class="row" style="padding: 10px;display: flex; justify-content: space-between; align-items: center;">
+            <span style="text-align:right; padding-left:5px;">
+              <img height="15px" width="15px" src="./icons8-star-30.png" alt="star"> 4.5
+            </span>
+            <span class="right" >3 Pending</span>
+          </div>
+
+          <div class="card-image">
+            <img src="<%= service.picture %>" alt="Worker Image">
+          </div>
+
+          <div class="card-info">
+            <p style="font-weight: 400;">
+              <b><%= service.firstname %> <%= service.surname %></b>
+            </p>
+            <div class="info">
+              <p class="desig" style="padding-top: 5px;">
+                <%= service.work_type %> |
+                <img height="15px" width="15px" src="./icons8-location-40.png" alt="location">
+                <%= service.state %>
+              </p>
+              <!-- Inside your service loop -->
+     <button class="btn btn-dark confirm-btn" data-service='<%- JSON.stringify(service) %>' data-user='<%- JSON.stringify(userInfo) %>'>
+       Book </button>
+  </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+      <% } else { %>
+     <div class="no-service">
+      <img src="./location_unavilable.png" alt="" height="500px" width="500px" border-radius="50%">
+  </div>
+  <% } %>
+  </div>
+
+   <% if (services && services.length > 0) { %>
+  <div class="pagination">
+    <li class="page-item previous-page disable"><a class="page-link" href="#">Prev</a></li>
+    <li class="page-item next-page"><a class="page-link" href="#">Next</a></li>
+  </div>
+  <% } %>
+
+  <script>
+    function getPageList(totalPages, page, maxLength) {
+      function range(start, end) {
+        return Array.from(Array(end - start + 1), (_, i) => i + start);
+      }
+
+      const sideWidth = maxLength < 9 ? 1 : 2;
+      const leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
+      const rightWidth = (maxLength - sideWidth * 2 - 3) >> 1;
+
+      if (totalPages <= maxLength) {
+        return range(1, totalPages);
+      }
+
+      if (page <= maxLength - sideWidth - 1 - rightWidth) {
+        return range(1, maxLength - sideWidth - 1)
+          .concat(0, range(totalPages - sideWidth + 1, totalPages));
+      }
+
+      if (page >= totalPages - sideWidth - 1 - rightWidth) {
+        return range(1, sideWidth)
+          .concat(0, range(totalPages - sideWidth - 1 - rightWidth - leftWidth, totalPages));
+      }
+
+      return range(1, sideWidth)
+        .concat(0, range(page - leftWidth, page + rightWidth), 0, range(totalPages - sideWidth + 1, totalPages));
+    }
+
+    $(function () {
+      const numberOfItems = $(".card-content .card").length;
+      const limitPerPage = 6;
+      const totalPages = Math.ceil(numberOfItems / limitPerPage);
+      const paginationSize = 7;
+      let currentPage;
+
+      function showPage(whichPage) {
+        if (whichPage < 1 || whichPage > totalPages) return false;
+
+        currentPage = whichPage;
+
+        $(".card-content .card").hide()
+          .slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage).show();
+
+        $(".pagination li").slice(1, -1).remove();
+
+        getPageList(totalPages, currentPage, paginationSize).forEach(item => {
+          $("<li>")
+            .addClass("page-item")
+            .addClass(item ? "current-page" : "dots")
+            .toggleClass("active", item === currentPage)
+            .append($("<a>").addClass("page-link").attr({ href: "javascript:void(0)" }).text(item || "..."))
+            .insertBefore(".next-page");
+        });
+
+        $(".previous-page").toggleClass("disable", currentPage === 1);
+        $(".next-page").toggleClass("disable", currentPage === totalPages);
+        return true;
+      }
+
+      $(".card-content").show();
+      showPage(1);
+
+      $(document).on("click", ".pagination li.current-page:not(.active)", function () {
+        return showPage(+$(this).text());
+      });
+
+      $(".next-page").on("click", function () {
+        return showPage(currentPage + 1);
+      });
+
+      $(".previous-page").on("click", function () {
+        return showPage(currentPage - 1);
+      });
+    });
+
+      document.querySelectorAll('.confirm-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const service = JSON.parse(btn.getAttribute('data-service'));
+      const userInfo = JSON.parse(btn.getAttribute('data-user'));
+      confirm_service(service, userInfo);
+    });
+  });
+
+  function confirm_service(service, userInfo) {
+    fetch('/confirm_service', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ service, userInfo })
+    })
+    .then(res => res.text()) // or use .json() if you send JSON
+    .then(html => {
+      document.open();
+      document.write(html);
+      document.close();
+    })
+    .catch(err => console.error('Error:', err));
+  }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <title>Edit Profile - Classic Style</title>
+
+    <style>
+        body {
+            background-color: #E7E7E7;
+            font-family: Georgia, serif;
+        }
+        .container-fluid {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            color: #9100FF;
+        }
+        .back {
+            text-align: left;
+            padding: 5px 0;
+            color: #333;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #9100FF;
+        }
+        .section-title {
+            font-size: 22px;
+            color: #9100FF;
+            margin-top: 20px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 8px;
+        }
+        .label-text {
+            font-weight: bold;
+            color: #555;
+        }
+        .form-control {
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #preview, #aadhar-preview {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        .btn-primary, .btn-dark {
+            padding: 8px 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .bottom {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .required:after {
+            content: " *";
+            color: red;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            position: relative;
+        }
+        .grid-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 1px;
+            background-color: #ccc;
+            transform: translateX(-50%);
+        }
+        .divider {
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="container-fluid">
+        <div class="back">
+            <button class="btn btn-link" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+        </div>
+
+        <div class="header">
+            <h1>Edit Profile</h1>
+        </div>
+
+        <!-- Form -->
+        <form action="/edit-profile" method="POST" enctype="multipart/form-data">
+            <div class="grid-container">
+                <!-- Personal Info Section (Left Column) -->
+                <div>
+                    <div class="section-title">Personal Information</div>
+                    <div class="text-center mb-3">
+                        <img id="preview" src="upload.png" alt="Profile Picture" onclick="document.getElementById('imageInput').click()">
+                        <button type="button" class="btn btn-primary btn-block mt-2" onclick="document.getElementById('imageInput').click()">Upload Picture</button>
+                        <input type="file" id="imageInput" name="picture" accept="image/*" style="display: none;">
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >First Name</label>
+                        <input type="text" name="firstname" class="form-control" placeholder="Enter First Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >Middle Name</label>
+                        <input type="text" name="middlename" class="form-control" placeholder="Enter Middle Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >Surname Name</label>
+                        <input type="text" name="surname" class="form-control" placeholder="Enter Surname" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >Contact</label>
+                        <input type="text" name="contact" class="form-control" placeholder="Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >Age</label>
+                        <input type="text" name="age" class="form-control" placeholder="Age" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >Gender</label>
+                        <select name="gender" class="form-control">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group text-center">
+                        <img id="aadhar-preview" src="upload.png" alt="Aadhar Preview" onclick="document.getElementById('aadharInput').click()">
+                        <button type="button" class="btn btn-primary btn-block mt-2" onclick="document.getElementById('aadharInput').click()">Upload Aadhar</button>
+                        <input type="file" id="aadharInput" name="aadhar" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+
+                <!-- Work, Education, and Booking Details Section (Right Column) -->
+                <div>
+                    <div class="section-title">Work & Education Details</div>
+                    <div class="form-group">
+                        <label class="label-text required" >Work Type</label>
+                            <select name="work_type" class="form-control">
+                                <option value="Plumbing">Plumbing</option>
+                                <option value="Electrician">Electrician</option>
+                                <option value="Painting">Painting</option>
+                                <option value="Furnishing">Furnishing</option>
+                                <option value="Interior Designing">Interior Designing</option>
+                                <option value="Aluminium Work">Aluminium Work</option>
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >About</label>
+                        <textarea name="about" class="form-control" rows="3" placeholder="Brief about yourself"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >Work Experience</label>
+                        <input type="number" name="experience" class="form-control" placeholder="Years of Experience" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >Qualification</label>
+                        <input type="text" name="qualification" class="form-control" placeholder="Highest Qualification">
+                    </div>
+                    
+                    <div class="divider"></div>
+
+                    <div class="section-title">Booking Details</div>
+                    <div class="form-group">
+                        <label class="label-text required" >Available Shifts</label>
+                        <select name="shift" class="form-control">
+                            <option value="Day">Day</option>
+                            <option value="Night">Night</option>
+                            <option value="Both">Both</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >City</label>
+                        <input type="text" name="city" class="form-control" placeholder="Enter City of service">
+                    </div>
+                     <div class="form-group">
+                        <label class="label-text required" >LandMark</label>
+                        <input type="text" name="landmark" class="form-control" placeholder="Enter Landmark">
+                    </div>
+                     <div class="form-group">
+                        <label class="label-text required" >Pincode</label>
+                        <input type="Number" name="pincode" class="form-control" placeholder="Enter Pincode">
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >District</label>
+                        <input type="text" name="district" class="form-control" placeholder="Enter District of service">
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >State</label>
+                        <input type="text" name="state" class="form-control" placeholder="Enter State of service">
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required" >Location</label>
+                        <input type="text" name="location" class="form-control" placeholder="Enter Full Location of service">
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Confirm Button -->
+            <div class="bottom">
+                <button type="submit" class="btn btn-dark">Confirm</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to handle profile image preview
+        const imageInput = document.getElementById("imageInput");
+        const preview = document.getElementById("preview");
+
+        imageInput.addEventListener("change", function () {
+            const file = imageInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // JavaScript to handle Aadhar image preview
+        const aadharInput = document.getElementById("aadharInput");
+        const aadharPreview = document.getElementById("aadhar-preview");
+
+        aadharInput.addEventListener("change", function () {
+            const file = aadharInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    aadharPreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service History</title>
+    <meta name="description" content="View your service booking history with HOMEWORK - trusted handyman services">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        :root {
+            --primary-purple: #9100FF;
+            --dark-background: #1c1c1c;
+            --light-text: #f8f9fa;
+        }
+      
+        /* Top navbar */
+        .navbar {
+            /* Using the custom dark background color */
+            background-color: var(--dark-background) !important; 
+        }
+        .navbar-brand img {
+            height: 40px; /* Adjust logo size */
+            margin-right: 5px;
+        }
+
+        /* Use standard Bootstrap classes for nav-links */
+        .navbar .nav-link{
+           color: var(--primary-purple) !important;
+        }
+        .navbar .nav-link:hover, .navbar .nav-item.active .nav-link{
+            color: var(--primary-purple) !important; /* Hover/Active color */
+        }
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+        
+        /* Styling for the Post-Login Dropdown Menu Container */
+        /* Must override Bootstrap's default dropdown-menu styling */
+/* Dropdown Menu (Post-Login) */
+        .dropdown-menu {
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            padding: 0;
+            background-color: var(--primary-purple);  /* Changed to white to match common design patterns, original was purple */
+            border: 1px solid var(--primary-purple); /* Added border */
+        }
+        /* Style for the Header (User Role and Name) */
+        .dropdown-header {
+            color: #333;
+            font-weight: 600;
+            padding: 0.75rem 1rem 0.5rem;
+            white-space: nowrap;
+            background-color: var(--primary-purple); /* Highlight header */
+        }
+        /* Style for individual Dropdown Items (links) */
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            transition: background-color 0.3s;
+            color: #333;
+             background-color: var(--primary-purple); 
+        }
+        /* Hover effect for Dropdown Items */
+        .dropdown-item:hover {
+            background-color: var(--primary-purple); 
+            color: white !important; 
+        }
+        /* Profile Icon and Image */
+        .nav-item.dropdown .nav-link i {
+            color: var(--primary-purple) !important; 
+        }
+        .navbar-profile-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-purple);
+            background-color: #fff;
+            box-shadow: 0 0 6px rgba(145, 0, 255, 0.3);
+            transition: transform 0.2s ease;
+        }
+        .navbar-profile-img:hover {
+            transform: scale(1.05);
+        }
+        .btn-login {
+            background-color: var(--primary-purple);
+            color: white;
+            padding: 0.375rem 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none !important;
+            font-weight: 500;
+            margin-left: 15px;
+            transition: background-color 0.3s;
+        }
+        /* Replaced Tailwind's bg-gradient with standard CSS properties */
+        body {
+            /* Using the original brand colors from Tailwind config as fallback */
+            background: linear-gradient(to bottom, #f8f3fc, #eae6f9);
+        }
+        
+        nav{
+            background-color: #1c1c1c;
+        }
+
+        /* Main Content and Table Styling - Replaced Tailwind with standard CSS/Bootstrap classes */
+        .content-container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .history-title {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            color: #8000ff; /* brand-purple */
+        }
+
+        .button-group a {
+            border: 1px solid #8000ff; /* brand-purple */
+            color: #8000ff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            transition: background-color 0.3s, color 0.3s;
+            text-decoration: none;
+        }
+
+        .button-group a:hover {
+            background-color: #8000ff;
+            color: white;
+        }
+        
+        /* Table Styling */
+        .table-container {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            overflow: hidden;
+        }
+
+        .table-header {
+            background-color: #8000ff; /* brand-purple */
+            color: white;
+        }
+
+        .table-header th {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .table-row-odd {
+            background-color: #f8f3fc; /* brand-purple-light */
+        }
+        
+        .table-row-even {
+            background-color: white;
+        }
+
+        .table-row-odd:hover, .table-row-even:hover {
+             background-color: #eae6f9; /* brand-purple-lighter */
+        }
+
+        .table-data {
+            padding: 1rem 1.5rem;
+            color: #4b5563; /* gray-700 */
+            border-top: 1px solid #e5e7eb; /* Subtle line between rows */
+        }
+
+        .rebook-button {
+            background-color: #1f2937; /* gray-800 */
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem; /* rounded-md */
+            transition: background-color 0.3s;
+            border: none;
+        }
+
+        .rebook-button:hover {
+            background-color: #374151; /* gray-700 */
+        }
+
+        /* footer section */
+        /* --- Footer Styling (Kept as is, as it's pure CSS) --- */
+        .footer {
+            background-color: var(--dark-background);
+            color: white;
+            padding: 40px 10px;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .footer-left {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #706f6f;
+        }
+        .footer-left img {
+            height: auto;
+            width: auto;
+            margin-bottom: 5px;
+        }
+
+        .footer-center{ 
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #706f6f;
+        }
+        .footer-center ul { 
+            list-style: none; 
+            padding: 0; 
+            line-height: 2.2; 
+        }
+        .footer-center ul li a { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 14px; 
+            transition: color 0.3s; 
+        }
+        .footer-center ul li a:hover { 
+            color: var(--primary-purple); 
+        }
+
+        .footer-right { 
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px; 
+        }
+        .footer-right .social { 
+            display: flex; 
+            align-items: center; 
+            font-size: 14px; 
+        }
+        .footer-right .social span { 
+            margin-right: 10px; 
+            color: #ccc; 
+            min-width: 70px; 
+            text-align: right;
+        }
+        .footer-right .social i { 
+            font-size: 16px; 
+            color: var(--primary-purple); 
+            background: white; 
+            border-radius: 4px; 
+            padding: 5px; 
+            transition: transform 0.3s; 
+            margin-left: 10px; 
+        }
+        .footer-right .social i:hover { 
+            transform: scale(1.1); 
+        }
+        .tagline { 
+            font-size: 13px; 
+            color: #ccc; 
+            margin-top: 8px; 
+        }
+        @media (max-width: 992px) {
+            .footer-left, .footer-center, .footer-right { border-right: none; margin-bottom: 20px; }
+        }
+
+    </style>
+</head>
+<body class="min-h-screen">
+<div class="container-fluid px-0">
+    <nav class="navbar navbar-expand-lg navbar-dark"> 
+        <a class="navbar-brand" href="/">
+            <img src="logo.png" alt="HomeWork Logo">
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item  px-3">
+                    <a class="nav-link" href="/">Home </a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/Pricing">Pricing</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/About">About</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/Contact">Contact</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="/Faq">FAQs</a>
+                </li>
+                
+                <% if (worker) { %>
+                <li class="nav-item dropdown px-3">
+                    <a class="nav-link" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <% if (worker.picture && worker.picture.trim() !== '') { %>
+                            <img src="<%= worker.picture %>" 
+                                    alt="Profile" 
+                                    class="navbar-profile-img">
+                        <% } else { %>
+                            <i class="fas fa-user-circle" style="color: var(--primary-purple); font-size: 24px;"></i>
+                        <% } %>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                        <h6 class="dropdown-header" id="userRoleName">UserName : <%= worker.username %></h6> 
+                        <div class="dropdown-divider"></div>
+                        
+                        <a class="dropdown-item" href='/Worker_Dashboard'>
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item dropdown-logout-btn" href="/logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </li>
+                <% } else { %>
+                <li class="nav-item px-3">
+                    <a class="btn-login" href="signin.html" >Login</a>
+                </li>
+                <% } %>
+                </ul>
+        </div>
+    </nav>
+</div>
+
+    <div class="content-container">
+        <div class="header-section">
+            <h1 class="history-title">History</h1>
+            <div class="button-group d-flex" style="gap: 1rem;">
+                <a href="/Worker_Dashboard">
+                    Back to dashboard
+                </a>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="table w-100 mb-0">
+                <thead class="table-header">
+                    <tr>
+                        <th scope="col" class="px-6 py-4 text-left font-semibold">Sr No.</th>
+                        <th scope="col" class="px-6 py-4 text-left font-semibold">Date</th>
+                        <th scope="col" class="px-6 py-4 text-left font-semibold">Name of user</th>
+                        <th scope="col" class="px-6 py-4 text-left font-semibold">Issue</th>
+                        <th scope="col" class="px-6 py-4 text-left font-semibold">Service time</th>
+                        <th scope="col" class="px-6 py-4 text-left font-semibold">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% history_data.forEach((entry, index) => { %>
+                    <tr class="<%= index % 2 === 0 ? 'table-row-even' : 'table-row-odd' %>">
+                        <td class="table-data"><%= index + 1 %></td>
+                        <td class="table-data"><%= entry.dateofservice %></td>
+                        <td class="table-data"><%= entry.clientname%></td>
+                        <td class="table-data"><%= entry.issue_name %></td>
+                        <td class="table-data"><%= entry.totaltimeofservice %></td>
+                        <td class="table-data">₹<%= entry.price %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <img src="logo.png" alt="HomeWork Logo">
+                <p class="tagline">Book your trusted handyman in just a few clicks.</p>
+            </div>
+
+            <div class="footer-center">
+                <ul>
+                    <li><a href="/About">About</a></li>
+                    <li><a href="/Signin">Sign In</a></li>
+                    <li><a href="/Faq">FAQs</a></li>
+                    <li><a href="/Pricing">Pricing</a></li>
+                    <li><a href="/Contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-right">
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script> 	
+</body>
+</html>

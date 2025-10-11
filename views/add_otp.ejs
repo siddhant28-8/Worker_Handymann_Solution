@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Timer</title>
+
+  <!-- Bootstrap / Font Awesome (unchanged) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+     body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f2eff3, #cba9f8);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* page always full height */
+  }
+
+  /* Make content take remaining height */
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centers vertically */
+    align-items: center;     /* centers horizontally */
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  /* Navbar fixes */
+  nav.navbar {
+    width: 100%;
+  }
+
+    .heading {
+      margin-bottom: 25px;
+    }
+
+    .heading h2 {
+      color: #9100FF;
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .heading p {
+      font-size: 14px;
+      color: #333;
+      margin-top: 8px;
+    }
+
+    .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-width: 600px;   /* limit width */
+    margin: auto;
+    }
+
+    /* Left OTP Section */
+    .otp-section {
+     display: flex;
+     flex-direction: column;
+     gap: 15px;
+     padding-right: 15px;
+     border-right: 1px solid #aaa;
+    }
+
+    .otp-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .otp-box h3 {
+      color: #9100FF;
+      font-size: 18px;
+      margin: 0;
+      text-align: center;
+    }
+
+    .otp-box input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      width: 200px;
+    }
+
+    .otp-box button {
+      padding: 8px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    .otp-box button:hover {
+      background: #444;
+    }
+
+    /* Timer Section */
+    .timer-section {
+     text-align: center;
+     padding-left: 15px;
+     min-width: 220px;   /* keep compact but aligned */
+     }
+
+    .timer-section h3 {
+      color: #9100FF;
+      margin-bottom: 10px;
+    }
+
+    .timerDisplay {
+      font-size: 32px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    .note {
+      font-size: 13px;
+      margin-top: 8px;
+      color: #333;
+    }
+
+     /*footer section */
+    .footer {
+  background-color: #1c1c1c;
+  color: white;
+  margin-top:20px;
+  padding: 20px 10px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-left, .footer-center, .footer-right {
+  flex: 1;
+  margin: 20px;
+}
+
+.footer-left, .footer-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ border-right: 1px solid #706f6f;
+}
+
+.footer-right{
+  display:flex;
+   gap: 40px; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tagline {
+  font-size: 13px;
+  color: #ccc;
+  margin-top: 8px;
+}
+
+.footer-center ul {
+  list-style: none;
+  padding: 0;
+  line-height: 2.2;
+}
+
+.footer-center ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.footer-center ul li a:hover {
+  color: #9900cc;
+}
+
+.footer-right .social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.footer-right .social span {
+  margin-right: 10px;
+  color: #ccc;
+}
+
+.footer-right .social i {
+  font-size: 16px;
+  color: #9900cc;
+  background: white;
+  border-radius: 4px;
+  padding: 5px;
+  transition: transform 0.3s;
+}
+
+.footer-right .social i:hover {
+  transform: scale(1.1);
+}
+
+</style>
+</head>
+<body>
+
+<!-- Hidden element carrying safe, encoded data -->
+<div id="bookingData"
+     data-booking="<%= encodeURIComponent(JSON.stringify(bookingInfo)) %>"></div>
+
+<div class="main-content">
+  <div class="heading">
+    <h2>Work Timer with OTP</h2>
+    <p>Enter the correct OTP to <b>start</b> and later to <b>end</b> the work timer.</p>
+  </div>
+
+  <div class="container">
+    <div class="otp-section">
+      <div class="otp-box">
+        <h3>Start OTP</h3>
+        <input type="text" id="startOtp" placeholder="Enter Start OTP">
+        <button type="button" id="startBtn">Confirm</button>
+      </div>
+
+      <div class="otp-box">
+        <h3>End OTP</h3>
+        <input type="text" id="stopOtp" placeholder="Enter End OTP">
+        <button type="button" id="stopBtn">Confirm</button>
+      </div>
+    </div>
+
+    <div class="timer-section">
+      <h3>Timer</h3>
+      <div id="timerDisplay" class="timerDisplay">00 : 00 : 00</div>
+      <div class="note">
+        Provide the End-OTP to stop the timer after completion of work.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Safely decode and parse booking info
+  const el          = document.getElementById('bookingData');
+  const bookingInfo = JSON.parse(decodeURIComponent(el.dataset.booking));
+
+  const correctStart = bookingInfo.start_otp.toString();
+  const correctEnd   = bookingInfo.end_otp.toString();
+
+  const startInput   = document.getElementById('startOtp');
+  const stopInput    = document.getElementById('stopOtp');
+  const timerDisplay = document.getElementById('timerDisplay');
+  const startBtn     = document.getElementById('startBtn');
+  const stopBtn      = document.getElementById('stopBtn');
+
+  let timerInterval;
+  let seconds = 0;
+
+  function formatTime(sec) {
+    const h = String(Math.floor(sec / 3600)).padStart(2,'0');
+    const m = String(Math.floor((sec % 3600) / 60)).padStart(2,'0');
+    const s = String(sec % 60).padStart(2,'0');
+    return `${h} : ${m} : ${s}`;
+  }
+
+  startBtn.addEventListener('click', () => {
+    const otp = startInput.value.trim();
+    if (!otp) return alert('Please enter Start OTP');
+    if (otp !== correctStart) return alert('Incorrect Start OTP!');
+    clearInterval(timerInterval);
+    seconds = 0;
+    timerInterval = setInterval(() => {
+      seconds++;
+      timerDisplay.textContent = formatTime(seconds);
+    }, 1000);
+    alert('Timer started!');
+  });
+
+  document.getElementById('stopBtn').addEventListener('click', () => {
+     const otp = stopInput.value.trim();
+     if (!otp) return alert('Please enter End OTP');
+     if (otp !== correctEnd) return alert('Incorrect End OTP!');
+     clearInterval(timerInterval);
+
+     const totalTime = formatTime(seconds);
+     alert('Work stopped! Total time: ' + totalTime);
+
+     // 👉 Send totalTime & booking info to server, then redirect
+     fetch('/Work_In_Progress/payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bookingInfo, totalTime })
+     })
+     .then(res => res.json())
+     .then(data => {
+        if (data.redirect) window.location.href = data.redirect;
+     })
+     .catch(err => console.error('Payment route error:', err));
+   });
+});
+</script>
+
+</body>
+</html>

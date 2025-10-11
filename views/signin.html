@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-purple: #8823ed; /* Used for headlines and accents */
+            --dark-background: #1c1c1c;
+            --light-text: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f6f4f8, #9787cd);
+            color: #333;
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column;
+        }
+
+        /* --- Header/Navbar Styling --- */
+        .navbar {
+            background-color: var(--dark-background) !important;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-brand img {
+            height: 40px; 
+            margin-right: 5px;
+        }
+        
+        .nav-link, .navbar-toggler-icon, .btn-login {
+            color: var(--light-text) !important;
+            transition: color 0.3s;
+        }
+        .btn-login {
+            background-color: var(--primary-purple);
+            padding: 0.375rem 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none !important;
+            font-weight: 500;
+            margin-left: 15px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-purple) !important;
+        }
+
+        /* --- Main Sign In Part Styling (Professional Update) --- */
+        .main-content {
+            flex-grow: 1; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 10px;
+        }
+         
+        .container-signin {
+            max-width: 500px; 
+            background-color: #E7E7E7; 
+             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border-radius: 12px; 
+            padding: 30px; 
+            width: 100%;
+        }
+
+        .container-signin:hover {
+         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+         transform: translateY(-3px);
+         transition: all 0.3s ease-in-out;
+        }
+ 
+        .form {
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-purple); 
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Style to group label and input horizontally */
+        .form-field-group {
+            display: flex; 
+            align-items: center; 
+            margin-bottom: 15px; 
+        }
+
+        /* Style for the label (Email/Password text) */
+        .form-field-group label {
+            margin-right: 15px; 
+            min-width: 80px; 
+            font-weight: 500;
+            margin-bottom: 0; 
+            /* MODIFIED: Left-aligns the label text */
+            text-align: left; 
+        }
+
+        /* Adjusted styles for inputs/select to fit flex layout */
+        select, 
+        input[type="text"], 
+        input[type="password"] {
+            flex-grow: 1; 
+            width: auto; 
+            padding: 12px;
+            margin: 0; 
+            display: block;
+            border: 1px solid #ced4da; 
+            background: #f8f9fa; 
+            border-radius: 8px;
+        }
+        
+        /* Retaining vertical spacing for the role select, as it doesn't have a side-by-side input */
+        #role {
+             width: 100%;
+             margin: 5px 0 15px 0; 
+        }
+
+        select:focus, input[type="text"]:focus, input[type="password"]:focus {
+            background-color: #fff;
+            outline: none;
+            border-color: var(--primary-purple); 
+            box-shadow: 0 0 0 0.2rem rgba(136, 35, 237, 0.25);
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #6a1baa; 
+            margin: 1rem 0;
+        }
+        
+        .btn-signin {
+            background-color: var(--primary-purple); 
+            color: white;
+            padding: 12px 16px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 15px; 
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn-signin:hover {
+            background-color: #6a1baa; 
+            opacity: 1;
+        }
+
+        #button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        a {
+            color: var(--primary-purple); 
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Footer Styling --- */
+        .footer {
+            background-color: var(--dark-background);
+            color: white;
+            padding: 40px 10px;
+            margin-top: auto; 
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .footer-left {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #706f6f;
+        }
+        .footer-left img {
+            height: auto;
+            width: auto;
+            margin-bottom: 5px;
+        }
+
+        .footer-center{ 
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #706f6f;
+        }
+        .footer-center ul { 
+            list-style: none; 
+            padding: 0; 
+            line-height: 2.2; 
+        }
+        .footer-center ul li a { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 14px; 
+            transition: color 0.3s; 
+        }
+        .footer-center ul li a:hover { 
+            color: var(--primary-purple); 
+        }
+
+        .footer-right { 
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px; 
+        }
+        .footer-right .social { 
+            display: flex; 
+            align-items: center; 
+            font-size: 14px; 
+        }
+        .footer-right .social span { 
+            margin-right: 10px; 
+            color: #ccc; 
+            min-width: 70px; 
+            text-align: right;
+        }
+        .footer-right .social i { 
+            font-size: 16px; 
+            color: var(--primary-purple); 
+            background: white; 
+            border-radius: 4px; 
+            padding: 5px; 
+            transition: transform 0.3s; 
+            margin-left: 10px; 
+        }
+        .footer-right .social i:hover { 
+            transform: scale(1.1); 
+        }
+        .tagline { 
+            font-size: 13px; 
+            color: #ccc; 
+            margin-top: 8px; 
+        }
+
+        @media (max-width: 992px) {
+            .footer-left, .footer-center, .footer-right { border-right: none; margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid px-0">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="/">
+                <img src="logo.png" alt="HomeWork Logo">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto align-items-center">
+                    <li class="nav-item  px-3">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="/pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="/About">About</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="/Contact">Contact</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="/Faq">FAQs</a>
+                    </li>
+                    <li class="nav-item active px-3">
+                        <a class="btn-login" href="signin.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="main-content"> 
+        <div class="container-signin">
+            <form class="form" name="form" action="/signin" method="post" onsubmit="return validateForm()">
+                <h1><b>Sign In</b></h1>
+                <p style="text-align: center;">Not A Member? <a href="signup.html">Register</a> | <a href="#">Forgot Password?</a></p>
+                <hr>
+
+                <label for="role">Select your profile type</label>
+                <select id="role" name="role">
+                    <option value="worker">Worker</option>
+                    <option value="user">User</option>
+                </select>
+
+                <div class="form-field-group">
+                    <label for="Email">Email</label>
+                    <input type="text" class="form-cantrol" placeholder="Enter Email" name="Email" id="Email" required>
+                </div>
+
+                <div class="form-field-group">
+                    <label for="Password">Password</label>
+                    <input type="password" class="form-cantrol" placeholder="Enter Password" name="Password" id="Password" required>
+                </div>
+
+                <div id="button-container">
+                    <button class="btn-signin" id="button" type="submit">Sign In</button> 
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <img src="logo.png" alt="HomeWork Logo">
+                <p class="tagline">Book your trusted handyman in just a few clicks.</p>
+            </div>
+
+            <div class="footer-center">
+                <ul>
+                  <li><a href="/About">About</a></li>
+                    <li><a href="Signin.html">Sign In</a></li>
+                    <li><a href="/Faq">FAQs</a></li>
+                    <li><a href="/Pricing">Pricing</a></li>
+                    <li><a href="/Contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-right">
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <div class="social">
+                    <span>@homvices</span><a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function validateForm() {
+            let email = document.getElementById("Email").value;
+            let password = document.getElementById("Password").value;
+
+            if (!email.endsWith("@gmail.com")) {
+                alert("Enter a valid Gmail address");
+                return false;
+            } else if (password.length < 6) {
+                alert("Password must be more than 6 characters");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
+
+</body>
+</html>
