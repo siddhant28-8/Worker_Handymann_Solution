@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 
 
 user_dashboard_route.get('/', async(req, res) => {
-  const user_email = await req.session.user_email;
+  const user_email = req.session.user_email;
   const user=await User_data.findOne({email:user_email});
   req.session.user = {
     fullname: user.fullname,
@@ -17,7 +17,7 @@ user_dashboard_route.get('/', async(req, res) => {
 });
 
 user_dashboard_route.post('/', async (req,res)=>{
-   const user_email = await req.session.user_email;
+   const user_email =  req.session.user_email;
    const user=await User_data.findOne({email:user_email});
   //if (!user) return res.redirect('/login'); // optional auth check
   res.render('user_dashboard', { user:user });
