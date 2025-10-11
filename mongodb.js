@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 require('dotenv').config(); // Assuming you use dotenv to manage MONGODB_URI
 
 
-
 // --- 2. Define Nested Schemas (for Worker/User Data History, Notifications, Orders) ---
 const userNotificationSchema = new mongoose.Schema({
     workerEmail: {

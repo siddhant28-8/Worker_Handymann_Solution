@@ -22,8 +22,6 @@ app.use(
   })
 );
 
-
-
 //routes
 const registerRoute = require('./routes/register.js');
 const signinRoute=require('./routes/login.js');
