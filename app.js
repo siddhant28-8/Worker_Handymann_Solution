@@ -1,18 +1,28 @@
 const express = require('express');
 const path =require('path');
 const session = require('express-session');
+const MongoStore = require("connect-mongo");
 require('dotenv').config();
 const app = express();
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,  // 🔐 use .env in real projects
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 2, // 2 hours
-    httpOnly: true
-  }
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "siddhant8989xyz2808rai98rakesh", // replace with a strong secret
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI, // your Atlas URI
+      collectionName: "sessions",
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production", // HTTPS only in production
+    },
+  })
+);
+
+
 
 //routes
 const registerRoute = require('./routes/register.js');

@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config(); // Assuming you use dotenv to manage MONGODB_URI
 
-// --- 1. Mongoose Connection Setup ---
-
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('MongoDB connected successfully'))
-    .catch((err) => console.error('MongoDB connection error:', err));
 
 
 // --- 2. Define Nested Schemas (for Worker/User Data History, Notifications, Orders) ---
