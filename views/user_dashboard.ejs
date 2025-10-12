@@ -501,7 +501,7 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="col-md-10">
+      <main class="col-md-10" id="main-content">
         <div class="content">
           <!-- Profile Card -->
           <div class="card-section">
@@ -509,7 +509,7 @@
               <div class="d-flex align-items-start mb-4 flex-wrap flex-md-nowrap">
                 <!-- Profile Image -->
                 <div class="pr-3 pl-2">
-                  <img src="<%= user.picture %>" alt="Profile" class="profile-img" />
+                <img src="<%= user.picture %>" alt="Profile" class="profile-img" />
                 </div>
 
                 <!-- User Info -->
@@ -585,13 +585,18 @@
   <script>
     let btnn = document.getElementById("btnn");
     let divi = document.getElementById("first");
+    let mainContent = document.getElementById("main-content");
 
     btnn.onclick = function () {
       if (divi.style.display === "none") {
         divi.style.display = "block";
+        mainContent.classList.remove("col-md-12");
+        mainContent.classList.add("col-md-10");
         btnn.innerHTML = "<";
       } else {
         divi.style.display = "none";
+        mainContent.classList.remove("col-md-10");
+        mainContent.classList.add("col-md-12");
         btnn.innerHTML = ">";
       }
     };

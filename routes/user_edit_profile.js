@@ -27,6 +27,7 @@ const Storage=new CloudinaryStorage({
     },
 });
 
+
 const upload = multer({ storage: Storage }); 
 
 
@@ -38,9 +39,12 @@ User_edit_proile.post('/', upload.fields([
         // Extract form data
         const { fullname, email, contact, othercontact, gender, address, city, state, landmark, pincode} = req.body;
         
-        
-        // Get file paths from the request (uploaded images)
-        const picturePath = req.files['picture'] ? req.files['picture'][0].path : null;
+         let picturePath='';
+        if(gender=='Male'){
+        picturePath = req.files['picture'] ? req.files['picture'][0].path : 'https://res.cloudinary.com/duximb0lu/image/upload/v1760249605/Male_Profile_yjarsm.jpg';
+        }else{
+        picturePath = req.files['picture'] ? req.files['picture'][0].path : 'https://res.cloudinary.com/duximb0lu/image/upload/v1760249617/Female-Profile_se2wjy.jpg';
+        }
 
         // Create a new user document
         const newUser = new User_data({

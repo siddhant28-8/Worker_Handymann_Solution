@@ -78,8 +78,7 @@ const workerNotificationSchema = new mongoose.Schema({
 const workerOrderSchema = new mongoose.Schema({
     orderId: {
         type: String, 
-        required: true,
-        unique: true 
+        required: true
     },
     notificationId: {
         type: String,
@@ -132,8 +131,7 @@ const workerOrderSchema = new mongoose.Schema({
 const userBookingSchema = new mongoose.Schema({
     bookingId: {
         type: String, 
-        required: true,
-        unique: true
+        required: true
     },
     notificationId: {
         type: String,
@@ -307,7 +305,7 @@ const user_data_schema = new mongoose.Schema({
     state: { type: String },
     landmark: { type: String },
     pincode: { type: String },
-    picture: { type: String, required: true },
+    picture: { type: String },
     // Nested Arrays (Assuming similar structure to worker_profile)
     notification: [{ type: userNotificationSchema, default: [] }],
     bookings: [{ type: userBookingSchema, default: [] }], // Inferred from "bookings" in User_data section of your login.js

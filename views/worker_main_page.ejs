@@ -467,7 +467,7 @@
                 </div>
             </div>
 
-            <div class="col-md-9 col-lg-10">
+            <div class="col-md-9 col-lg-10" id="main-content">
                 <div class="row">
                     <div class="col-lg-8 mb-4">
                         <div class="profile-panel d-flex flex-wrap">
@@ -618,17 +618,26 @@
     });
 
     // Custom toggle for the left-arrow button (Existing functionality)
+   // Custom toggle for the left-arrow button (Updated functionality)
     let btnn = document.getElementById("btnn");
-    let divi = document.getElementById("first");
-   
+    let sidebar = document.getElementById("first"); // Renamed divi to sidebar for clarity
+    let mainContent = document.getElementById("main-content");
+
     btnn.onclick = function () {
-      if (divi.style.display === "none") {
-        divi.style.display = "block";
-        btnn.innerHTML = "&lt;";
-      } else {
-        divi.style.display = "none";
-        btnn.innerHTML = "&gt;";
-      }
+        // Toggle visibility of the sidebar using Bootstrap's d-none
+        let isHidden = sidebar.classList.toggle("d-none");
+        
+        if (isHidden) {
+            // Sidebar is hidden -> make main content full width (12 columns)
+            mainContent.classList.remove("col-md-9", "col-lg-10");
+            mainContent.classList.add("col-md-12", "col-lg-12");
+            btnn.innerHTML = ">"; // Change arrow to indicate sidebar is off-screen
+        } else {
+            // Sidebar is visible -> revert main content to its original width
+            mainContent.classList.remove("col-md-12", "col-lg-12");
+            mainContent.classList.add("col-md-9", "col-lg-10");
+            btnn.innerHTML = "<"; // Change arrow to indicate sidebar is visible
+        }
     };
 </script>
 </body>

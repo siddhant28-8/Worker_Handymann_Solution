@@ -21,6 +21,7 @@ app.use(
   })
 );
 
+
 //routes
 const registerRoute = require('./routes/register.js');
 const signinRoute=require('./routes/login.js');
@@ -42,9 +43,6 @@ const worker_history_route=require('./routes/worker_history.js');
 const otp_route=require('./routes/Add_Otp.js');
 
 const {user,worker,Worker_data,User_data}=require('./mongodb.js')
-
-
-
 //connection to database 
 const connectDB = require("./connection.js");  
 connectDB();

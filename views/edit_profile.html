@@ -59,8 +59,9 @@
             height: 80px;
             width: 80px;
             border-radius: 50%;
-            border: 1px solid #ddd;
+            border: 1px solid #9100FF;
             margin-bottom: 10px;
+            margin-top: 10px;
         }
         .btn-primary, .btn-dark {
             padding: 8px 20px;
@@ -95,6 +96,13 @@
             border-top: 1px solid #ccc;
             margin: 20px 0;
         }
+        /* ✅ Added better warning styling */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -107,7 +115,7 @@
         </div>
 
         <div class="header">
-            <h1>Edit Profile</h1>
+            <h1>Edit Profile 🛠️</h1>
         </div>
 
         <!-- Form -->
@@ -117,49 +125,52 @@
                 <div>
                     <div class="section-title">Personal Information</div>
                     <div class="text-center mb-3">
-                        <img id="preview" src="upload.png" alt="Profile Picture" onclick="document.getElementById('imageInput').click()">
+                        <img id="preview" src="upload.jpg" alt="Profile Picture" onclick="document.getElementById('imageInput').click()">
                         <button type="button" class="btn btn-primary btn-block mt-2" onclick="document.getElementById('imageInput').click()">Upload Picture</button>
                         <input type="file" id="imageInput" name="picture" accept="image/*" style="display: none;">
+                        <p id="image-warning" class="error-message" style="display:none;">Please upload your profile picture</p>
                     </div>
+
                     <div class="form-group">
-                        <label class="label-text required" >First Name</label>
+                        <label class="label-text required">First Name</label>
                         <input type="text" name="firstname" class="form-control" placeholder="Enter First Name" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >Middle Name</label>
+                        <label class="label-text required">Middle Name</label>
                         <input type="text" name="middlename" class="form-control" placeholder="Enter Middle Name" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >Surname Name</label>
+                        <label class="label-text required">Surname Name</label>
                         <input type="text" name="surname" class="form-control" placeholder="Enter Surname" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >Username</label>
+                        <label class="label-text required">Username</label>
                         <input type="text" name="username" class="form-control" placeholder="Enter username" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >Email</label>
+                        <label class="label-text required">Email</label>
                         <input type="email" name="email" class="form-control" placeholder="name@example.com" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >Contact</label>
+                        <label class="label-text required">Contact</label>
                         <input type="text" name="contact" class="form-control" placeholder="Phone Number" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >Age</label>
+                        <label class="label-text required">Age</label>
                         <input type="text" name="age" class="form-control" placeholder="Age" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >Gender</label>
+                        <label class="label-text required">Gender</label>
                         <select name="gender" class="form-control">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
                     </div>
                     <div class="form-group text-center">
-                        <img id="aadhar-preview" src="upload.png" alt="Aadhar Preview" onclick="document.getElementById('aadharInput').click()">
+                        <img id="aadhar-preview" src="upload.jpg" alt="Aadhar Preview" onclick="document.getElementById('aadharInput').click()">
                         <button type="button" class="btn btn-primary btn-block mt-2" onclick="document.getElementById('aadharInput').click()">Upload Aadhar</button>
                         <input type="file" id="aadharInput" name="aadhar" accept="image/*" style="display: none;">
+                        <p id="aadhar-warning" class="error-message" style="display:none;">Please upload your Aadhar document</p>
                     </div>
                 </div>
 
@@ -167,34 +178,34 @@
                 <div>
                     <div class="section-title">Work & Education Details</div>
                     <div class="form-group">
-                        <label class="label-text required" >Work Type</label>
-                            <select name="work_type" class="form-control">
-                                <option value="Plumbing">Plumbing</option>
-                                <option value="Electrician">Electrician</option>
-                                <option value="Painting">Painting</option>
-                                <option value="Furnishing">Furnishing</option>
-                                <option value="Interior Designing">Interior Designing</option>
-                                <option value="Aluminium Work">Aluminium Work</option>
-                            </select>
+                        <label class="label-text required">Work Type</label>
+                        <select name="work_type" class="form-control">
+                            <option value="Plumbing">Plumbing</option>
+                            <option value="Electrician">Electrician</option>
+                            <option value="Painting">Painting</option>
+                            <option value="Furnishing">Furnishing</option>
+                            <option value="Interior Designing">Interior Designing</option>
+                            <option value="Aluminium Work">Aluminium Work</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >About</label>
-                        <textarea name="about" class="form-control" rows="3" placeholder="Brief about yourself"></textarea>
+                        <label class="label-text required">About</label>
+                        <textarea name="about" class="form-control" rows="3" placeholder="Brief about yourself" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >Work Experience</label>
-                        <input type="number" name="experience" class="form-control" placeholder="Years of Experience" min="0">
+                        <label class="label-text required">Work Experience</label>
+                        <input type="number" name="experience" class="form-control" placeholder="Years of Experience" min="0" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >Qualification</label>
-                        <input type="text" name="qualification" class="form-control" placeholder="Highest Qualification">
+                        <label class="label-text required">Qualification</label>
+                        <input type="text" name="qualification" class="form-control" placeholder="Highest Qualification" required>
                     </div>
-                    
+
                     <div class="divider"></div>
 
                     <div class="section-title">Booking Details</div>
                     <div class="form-group">
-                        <label class="label-text required" >Available Shifts</label>
+                        <label class="label-text required">Available Shifts</label>
                         <select name="shift" class="form-control">
                             <option value="Day">Day</option>
                             <option value="Night">Night</option>
@@ -202,30 +213,29 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >City</label>
-                        <input type="text" name="city" class="form-control" placeholder="Enter City of service">
-                    </div>
-                     <div class="form-group">
-                        <label class="label-text required" >LandMark</label>
-                        <input type="text" name="landmark" class="form-control" placeholder="Enter Landmark">
-                    </div>
-                     <div class="form-group">
-                        <label class="label-text required" >Pincode</label>
-                        <input type="Number" name="pincode" class="form-control" placeholder="Enter Pincode">
+                        <label class="label-text required">City</label>
+                        <input type="text" name="city" class="form-control" placeholder="Enter City of service" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >District</label>
-                        <input type="text" name="district" class="form-control" placeholder="Enter District of service">
+                        <label class="label-text required">LandMark</label>
+                        <input type="text" name="landmark" class="form-control" placeholder="Enter Landmark" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >State</label>
-                        <input type="text" name="state" class="form-control" placeholder="Enter State of service">
+                        <label class="label-text required">Pincode</label>
+                        <input type="number" name="pincode" class="form-control" placeholder="Enter Pincode" required>
                     </div>
                     <div class="form-group">
-                        <label class="label-text required" >Location</label>
-                        <input type="text" name="location" class="form-control" placeholder="Enter Full Location of service">
+                        <label class="label-text required">District</label>
+                        <input type="text" name="district" class="form-control" placeholder="Enter District of service" required>
                     </div>
-
+                    <div class="form-group">
+                        <label class="label-text required">State</label>
+                        <input type="text" name="state" class="form-control" placeholder="Enter State of service" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-text required">Location</label>
+                        <input type="text" name="location" class="form-control" placeholder="Enter Full Location of service" required>
+                    </div>
                 </div>
             </div>
 
@@ -236,10 +246,12 @@
         </form>
     </div>
 
+    <!-- ✅ Fixed JavaScript Validation -->
     <script>
-        // JavaScript to handle profile image preview
         const imageInput = document.getElementById("imageInput");
         const preview = document.getElementById("preview");
+        const aadharInput = document.getElementById("aadharInput");
+        const aadharPreview = document.getElementById("aadhar-preview");
 
         imageInput.addEventListener("change", function () {
             const file = imageInput.files[0];
@@ -247,14 +259,11 @@
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     preview.src = e.target.result;
+                    document.getElementById("image-warning").style.display = "none";
                 };
                 reader.readAsDataURL(file);
             }
         });
-
-        // JavaScript to handle Aadhar image preview
-        const aadharInput = document.getElementById("aadharInput");
-        const aadharPreview = document.getElementById("aadhar-preview");
 
         aadharInput.addEventListener("change", function () {
             const file = aadharInput.files[0];
@@ -262,8 +271,38 @@
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     aadharPreview.src = e.target.result;
+                    document.getElementById("aadhar-warning").style.display = "none";
                 };
                 reader.readAsDataURL(file);
+            }
+        });
+
+        // ✅ Validation for both images
+        document.querySelector("form").addEventListener("submit", function (event) {
+            const imageWarning = document.getElementById("image-warning");
+            const aadharWarning = document.getElementById("aadhar-warning");
+            let isValid = true;
+
+            if (!imageInput.files || imageInput.files.length === 0) {
+                imageWarning.style.display = "block";
+                isValid = false;
+            } else {
+                imageWarning.style.display = "none";
+            }
+
+            if (!aadharInput.files || aadharInput.files.length === 0) {
+                aadharWarning.style.display = "block";
+                isValid = false;
+            } else {
+                aadharWarning.style.display = "none";
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+                const firstError = document.querySelector(".error-message[style*='block']");
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
             }
         });
     </script>

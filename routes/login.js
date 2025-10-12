@@ -31,7 +31,6 @@ loginRouter.post('/', async (req, res) => {
       else   {
         const user_email=user1.Email;
         const data=await User_data.findOne({email:user_email});
-        data.pictureBasename = path.basename(data.picture);
         req.session.user_email=user_email;
         res.redirect('/User_Dashboard');
         
@@ -59,7 +58,6 @@ loginRouter.post('/', async (req, res) => {
     else   {
       const worker_email=worker1.Email;
       const data=await Worker_data.findOne({email:worker_email});
-      data.pictureBasename = path.basename(data.picture);
       req.session.worker_email=worker_email;
       res.redirect('/Worker_Dashboard');
       
