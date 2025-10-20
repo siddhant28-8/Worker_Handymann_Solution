@@ -6,6 +6,10 @@ const bodyParser = require("body-parser");
 
 
 book_service_route.get('/', (req, res) => {
+  const email = req.session.user_email;
+  if(email ==null)
+  res.sendFile(path.join(__dirname + '/../views/signin.html'));
+  else
   res.sendFile(path.join(__dirname + '/../views/book_services.html'));
 });
 
